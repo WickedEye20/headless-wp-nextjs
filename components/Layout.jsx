@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import Menu from './Menu';
+import { useEffect, useState } from "react";
+import Menu from "./Menu";
 
 export default function Layout({ children }) {
   const [menu, setMenu] = useState(null);
 
   useEffect(() => {
-    fetch('/api/menus')
-      .then(res => res.json())
-      .then(data => {
+    fetch("/api/menus")
+      .then((res) => res.json())
+      .then((data) => {
         // Use the first menu by default, or adjust as needed
-        setMenu(data && data.length ? data[0] : null);
+        setMenu(data && data.length ? data[4] : null);
       });
   }, []);
 
   return (
     <>
-      {menu && <Menu menu={menu} />}
-      <main>{children}</main>
+      <header className="mx-auto px-[7vw]">{menu && <Menu menu={menu} />}</header>
+      {children}
     </>
   );
 }

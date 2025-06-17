@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { formatDate } from "../../lib/formatDate";
-
-const WP_API_URL = process.env.NEXT_PUBLIC_WP_REST_URL?.replace('/posts?_embed', '') || '';
+import WpMediaImage from "../../components/WpMediaImage";
+import { getPostBySlug } from "../../lib/wordpress";
 
 export default function PostSingle() {
   const router = useRouter();
@@ -14,20 +14,16 @@ export default function PostSingle() {
 
   useEffect(() => {
     if (!slug) return;
-    fetch(`${WP_API_URL}/posts?slug=${slug}&_embed`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch');
-        return res.json();
-      })
-      .then(data => {
-        if (data.length > 0) {
-          setPost(data[0]);
+    getPostBySlug(slug)
+      .then((item) => {
+        if (item) {
+          setPost(item);
         } else {
-          setError('Post not found');
+          setError("Post not found");
         }
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
@@ -41,8 +37,8 @@ export default function PostSingle() {
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
       {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
-        <Image
-          src={post._embedded['wp:featuredmedia'][0].source_url}
+        <WpMediaImage
+          id={post._embedded['wp:featuredmedia'][0].id}
           alt={post.title.rendered}
           width={800}
           height={500}
