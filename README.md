@@ -44,10 +44,11 @@ Create a `.env.local` file in the project root and provide the following keys:
 
 | Key | Example | Description |
 |-----|---------|-------------|
-| `NEXT_PUBLIC_WP_REST_POST_URL` | `https://demo.site.com/wp-json/wp/v2/posts?_embed` | Base REST endpoint for posts. The helper strips query params as needed. |
-| `NEXT_PUBLIC_WP_REST_MEDIA_URL` | `https://demo.site.com/wp-json/wp/v2/media` | Media attachments endpoint. |
-| `NEXT_PUBLIC_WP_REST_PAGES_URL` | `https://demo.site.com/wp-json/wp/v2/pages` | Pages endpoint. |
-| `NEXT_PUBLIC_WP_MENUS_URL` | `https://demo.site.com/wp-json/menus/v1/menus` | WP REST Menus plugin endpoint. |
+| `NEXT_PUBLIC_WP_REST_POST_URL` | `https://demo.parkdistrictrec.com/wp-json/wp/v2/posts?_embed` | Base REST endpoint for posts. The helper strips query params as needed. |
+| `NEXT_PUBLIC_WP_REST_MEDIA_URL` | `https://demo.parkdistrictrec.com/wp-json/wp/v2/media` | Media attachments endpoint. |
+| `NEXT_PUBLIC_WP_REST_PAGES_URL` | `https://demo.parkdistrictrec.com/wp-json/wp/v2/pages` | Pages endpoint. |
+| `NEXT_PUBLIC_WP_MENUS_URL` | `https://demo.parkdistrictrec.com/wp-json/headless/v1/menus` | WP REST Menus plugin endpoint. |
+| `GF_API_URL` | `https://demo.parkdistrictrec.com/wp-json/gf/v2` | Gravity Forms API endpoint. |
 
 > Only the *public* keys are required because all REST calls happen client-side.
 
@@ -86,7 +87,7 @@ public/       → Static assets
 ```
 
 - `pages/` – Next.js pages
-- `lib/wordpress.js` – (Unused/empty)
+- `lib/wordpress.js` – (API calls of WordPress)
 - `next.config.js` – Next.js configuration
 
 ---
