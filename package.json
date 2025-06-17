@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+  "export": "next export",
+  "predeploy": "npm run build && npm run export",
+  "deploy": "gh-pages -d out",
     "lint": "next lint"
   },
   "dependencies": {
@@ -17,5 +19,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
